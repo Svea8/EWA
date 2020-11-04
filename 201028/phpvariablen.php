@@ -24,7 +24,7 @@
         }
         else {
             $max=$random3;
-        }
+        } 
 
         //Betrag Funktion
         function betrag($zahl){
@@ -40,11 +40,11 @@
         $betrag3=betrag($random3);
         
         //Ausgabe
-        echo("$random1+$random2+$random3=$sum </br>");
-        echo("Größte Zahl ist $max </br>");
-        echo("Betrag von $random1 = $betrag1</br>");
-        echo("Betrag von $random2 = $betrag2</br>");
-        echo("Betrag von $random3 = $betrag3</br>");
+        echo "$random1+$random2+$random3=$sum </br>" ;
+        echo "Größte Zahl ist" . $max . " </br>";
+        echo "Betrag von $random1 = $betrag1</br>";
+        echo "Betrag von $random2 = $betrag2</br>";
+        echo "Betrag von $random3 = $betrag3</br>";
     ?>
 </body>
 </html>
