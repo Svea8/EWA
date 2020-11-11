@@ -19,17 +19,15 @@
     if (mysqli_connect_errno()) {
         echo "Keine Verbindung zur Datenbank möglich: " . mysqli_connect_error();
     }
-    
-    $eintrag = "INSERT INTO personen (id, altersan, name) VALUES (2, 3, 'hi')";
-    $ergebnis = $mysqli -> query($eintrag);
+    $abfrage = "SELECT * FROM personen";
+    $ergebnis = $mysqli -> query($abfrage);
     if($ergebnis != false) {
-    echo '{"antwort" : "Eintrag war erfolgreich"}';
+        $daten = array();
+        while($row = $ergebnis -> fetch_assoc()) {
+            $daten[] = $row;
+        }
+        echo (json_encode($daten));
     }
-    else {
-    echo '{"antwort" : echo "Error: " .
-    mysqli_error($mysqli)}';
-    }
-
     $mysqli -> close();
     ?>
 </body>
