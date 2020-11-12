@@ -7,26 +7,29 @@
 </head>
 <body>
     <?php
-    $studenten= array();
-    $noten= array();
-
-    $noten[]=array("modul"=>"Mathe","note"=>3,7);
-    $noten[]=array("modul"=>"Me","note"=>3,7);
-    
-    $studenten[] =array(
-        "name"=> "Hans",
-        "mn" => 12345,
-        "sg" => "DC",
-        "noten" => $noten
-    );
-    $studenten[] =array(
-        "name"=> "Hans",
-        "mn" => 12345,
-        "sg" => "DC",
-        "noten" => $noten
-    );
-    
-    echo(json_encode($studenten)); 
+    $mysqli = new mysqli('localhost', 'root','', '1111');
+    if (mysqli_connect_errno()) {
+        echo "Keine Verbindung zur Datenbank möglich: " . mysqli_connect_error();
+    }
+    $abfrage = "SELECT * FROM studenten";
+    $notenabfrage="SELECT * FROM noten";
+    $ergebnis = $mysqli -> query($abfrage);
+    $noergebnis = $mysqli -> query($notenabfrage);
+    if($ergebnis != false) {
+        $daten = array();
+        while($row = $ergebnis -> fetch_assoc()) {
+            $daten[] = $row;
+        }
+        echo (json_encode($daten));
+    }
+    if($noergebnis != false) {
+        $nodaten = array();
+        while($norow = $noergebnis -> fetch_assoc()) {
+            $nodaten[] = $norow;
+        }
+        echo (json_encode($nodaten));
+    }
+    $mysqli -> close();
     /* Ansatz aus Folien
     <?php
     $student1 = array();
