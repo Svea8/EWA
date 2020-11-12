@@ -11,35 +11,53 @@
     if (mysqli_connect_errno()) {
         echo "Keine Verbindung zur Datenbank möglich: " . mysqli_connect_error();
     }
+    /*
+    $studenten = array();
     $abfrage = "SELECT * FROM studenten";
-    $notenabfrage="SELECT * FROM noten";
-    $ergebnis = $mysqli -> query($abfrage);
-    $noergebnis = $mysqli -> query($notenabfrage);
-    if($ergebnis != false) {
-        $daten = array();
-        while($row = $ergebnis -> fetch_assoc()) {
-            $daten[] = $row;
-        }
-        echo (json_encode($daten));
+    $ergebnis = $mysqli->query($abfrage);
+
+    if ($ergebnis != false) {
+    while ($row = $ergebnis->fetch_assoc()) {
+    $id = $row["id"];
+    $noten = array();
+    $abfrage2 = "SELECT modul, note FROM noten WHERE studid = " . $id;
+    $ergebnis2 = $mysqli->query($abfrage2);
+    if ($ergebnis2 != false) {
+    while ($row2 = $ergebnis2->fetch_assoc()) {
+    $noten[] = $row2;
     }
-    if($noergebnis != false) {
-        $nodaten = array();
-        while($norow = $noergebnis -> fetch_assoc()) {
-            $nodaten[] = $norow;
+    }
+    $row["noten"] = $noten;
+    $studenten[] = $row;
+    }
+    echo json_encode($studenten);
+    }*/
+
+    /**/
+    $daten = array();
+    $abfrage = "SELECT * FROM studenten";
+    $ergebnis = $mysqli -> query($abfrage);
+
+    if($ergebnis != false) {
+        
+        while($row = $ergebnis -> fetch_assoc()) {
+            $id = $row["id"];
+            $noten=array();
+
+            $notenabfrage="SELECT * FROM noten WHERE studid = " . $id;
+            $noergebnis = $mysqli -> query($notenabfrage);
+            
+            if($noergebnis != false) {
+                while($norow = $noergebnis -> fetch_assoc()) {
+                    $noten[] = $norow;
+                }
+                $row["noten"]=$noten;
+            }
+            $daten[]=$row;
         }
-        echo (json_encode($nodaten));
+        echo "<br>".json_encode($daten);   
     }
     $mysqli -> close();
-    /* Ansatz aus Folien
-    <?php
-    $student1 = array();
-    $student1["name"] = "Ute";
-    $student1["alter"] = 31;
-    $student2 = array();
-    $student2["name"] = "Hans";
-    $student2["alter"] = 28;
-    $studenten = array($student1, $student2);
-    ?>  */
     ?>
 </body>
 </html>
