@@ -1,13 +1,4 @@
-
-    <?php 
-    /*$personen=array(
-        "id" => 1,
-        "name" => "Ute",
-        "alter" => 31
-    );
-    $string=json_encode($personen);
-    echo($string);*/
-
+<?php 
     $mysqli = new mysqli('localhost', 'root','', '1111');
     if (mysqli_connect_errno()) {
         echo "Keine Verbindung zur Datenbank möglich: " . mysqli_connect_error();
@@ -22,4 +13,4 @@
         echo (json_encode($daten));
     }
     $mysqli -> close();
-    ?>
+?>
