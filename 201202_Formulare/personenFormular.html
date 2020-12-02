@@ -10,7 +10,27 @@
 </head>
 
 <body>
-    <div>hier steht was</div>
+    <form action="verarbeiten.php" method="GET">
+
+        <h1>Name und Alter</h1>
+        <div class="form-groups">
+            <div class="form-groups">
+                <label>Vorname
+                    <input type="text" name="vorname" class="form-control" />
+                </label>
+            </div>
+            <div class="form-groups">
+                <label>Alter
+                    <input type="text" name="alter" class="form-control" />
+                </label>
+            </div>
+            <div class="form-groups">
+                    <button type="submit" name="OK" value="weiter" class="form-control bg-primary text-light">
+                        Weiter
+                    </button>
+            </div>
+        </div>
+    </form>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
