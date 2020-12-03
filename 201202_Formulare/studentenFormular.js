@@ -24,14 +24,14 @@ function modulHinzufugen(){
     modulinput1.classList.add("form-control");
     modulinput1.setAttribute("type","text");
     modulinput1.setAttribute("type","text");
-    modulinput1.setAttribute("name","modul");
+    modulinput1.setAttribute("name","module[]");
     modullabel1.appendChild(modulinput1); 
     
     let modulinput2=document.createElement("input");
     modulinput2.classList.add("form-control");
     modulinput2.setAttribute("type","text");
     modulinput2.setAttribute("type","text");
-    modulinput2.setAttribute("name","note");
+    modulinput2.setAttribute("name","noten[]");
     modullabel2.appendChild(modulinput2);            
 
    
