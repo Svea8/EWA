@@ -1,14 +1,12 @@
 <?php
+    $mysqli = new mysqli('localhost', 'root','', '1111');
 
     $name = $_POST["name"];
     $mnr=$_POST["mnr"];
     $sgang=$_POST["sgang"];
     $module=$_POST["module"];
     $noten=$_POST["noten"];
-
-
-    $mysqli = new mysqli('localhost', 'root','', '1111');
-
+    
     if (mysqli_connect_errno()) {
         echo "Keine Verbindung zur Datenbank möglich: " . mysqli_connect_error();
     }
@@ -19,9 +17,10 @@
     } else {
         echo "Error: " . $sql . "<br>" . $mysqli->error;
     }
+    $id=$mysqli->insert_id;
 
     for ($i=0; $i < count($module); $i++) { 
-        $sql2= "INSERT INTO noten (modul, note, studid) VALUES ('$module[$i]', '$noten[$i]', '$mysqli->insert_id')";
+        $sql2= "INSERT INTO noten (modul, note, studid) VALUES ('$module[$i]', '$noten[$i]', '$id')";
         if ($mysqli->query($sql2) === TRUE) {
             echo "noten succ";
         } else {
