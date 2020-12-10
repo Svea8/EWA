@@ -22,16 +22,19 @@ function modulHinzufugen(){
 
     let modulinput1=document.createElement("input");
     modulinput1.classList.add("form-control");
-    modulinput1.setAttribute("type","text"); 
     modulinput1.setAttribute("type","text");
     modulinput1.setAttribute("name","module[]");
+    modulinput1.setAttribute("required","");
+    modulinput1.setAttribute("minlength","3");
     modullabel1.appendChild(modulinput1); 
     
     let modulinput2=document.createElement("input");
     modulinput2.classList.add("form-control");
-    modulinput2.setAttribute("type","text");
-    modulinput2.setAttribute("type","text");
+    modulinput2.setAttribute("type","number");
     modulinput2.setAttribute("name","noten[]");
+    modulinput2.setAttribute("required","");
+    modulinput2.setAttribute("min","1");
+    modulinput2.setAttribute("max","5");
     modullabel2.appendChild(modulinput2);            
 
    
