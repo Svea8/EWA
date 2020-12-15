@@ -62,8 +62,8 @@ function checkAll(){
     let res2=checkMnr();
     let res3=checkSg();
     let res4=checkMn();
-    /*let res5=checkNote();*/
-    return res1&&res2&&res3//&&res4;
+    let res5=checkNote();
+    return res1&&res2&&res3&&res4&&res5;
 }
 function checkName(){
     let field=document.getElementsByName("name")[0];
@@ -93,11 +93,25 @@ function checkSg(){
     return true;
 }
 function checkMn(){
-    let field=document.getElementsByName("module")[0];
-    if (field.value.length<3) {
-        //field.setCustomValidity("-");
-        //return false;
+    let field=document.getElementsByName("module[]");
+    for (let i = 0; i < field.length; i++) {
+        if (field[i].value.length<3) {
+        field[i].setCustomValidity("-");
+        return false;
+        }  
+        field[i].setCustomValidity("");
     }
-    //field.setCustomValidity("");
-    //return true;
+    return true;
+}
+
+function checkNote(){
+    let field=document.getElementsByName("noten[]");
+    for (let i = 0; i < field.length; i++) {
+        if (field[i].value.length<1||field[i].value>6||field[i].value<0) {
+        field[i].setCustomValidity("-");
+        return false;
+        }  
+        field[i].setCustomValidity("");
+    }
+    return true;
 }
