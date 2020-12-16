@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kochbuch</title>
+</head>
+
+<body>
+    <form action="rezeptAnlegen.php" method="GET">
+        <label>Rezeptname
+            <input type="text" name="rnameeingabe" required maxlength="50">
+        </label>
+        <label>Kurzbeschreibung
+            <input type="text" name="kbescheingabe" required maxlength="100">
+        </label>
+        <label id="dauer" for="dauerinp">Dauer</label>
+        <input type="range" name="dauer" id="dauerinp"
+            onchange="document.getElementById('dauer').innerHTML='Dauer: '+document.getElementsByName('dauer')[0].value">
+        <label>Schwierigkeitsgrad
+            <input type="text " name="schwer" required>
+        </label>
+        <div class="form-groups">
+            <label>Kategorie
+                <select name="sgang" class="form-control" required>
+                    <option value="">bitte auswählen</option>
+                    <option value="DC">DC</option>
+                    <option value="MI">MI</option>
+                    <option value="VT">VT</option>
+                </select>
+            </label>
+        </div>
+        <label>Zubereitung
+            <input type="text" name="zubeingabe">
+        </label>
+        <div id="modalpapa">
+            <div>
+                <div class="form-check-inline">
+                    <label>Menge 
+                        <input type="text" name="menge[]" class="form-control" />
+                    </label>
+                    <label>Einheit
+                        <select name="einheit[]" class="form-control">
+                            <option value="">bitte auswählen</option>
+                            <option value="kg">kg</option>
+                            <option value="g">g</option>
+                            <option value="ml">ml</option>
+                        </select>
+                    </label>
+                    <label>Name
+                        <input type="text" name="name[]" class="form-control" required/>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-check-inline">
+            <input type="button" name="plus" value="+" class="form-control bg-primary text-light"
+                onclick="modulHinzufugen()"/>
+            <input type="button" name="minus" value="-" class="form-control bg-primary text-light"
+                onclick="modulEntfernen()"/>
+        </div>
+        <input type="submit" name="sub" value="Weiter">
+    </form>
+</body>
+<script>
+    let body=document.getElementsByTagName("body")[0];
+
+function modulHinzufugen(){
+    
+    let modulpapa=document.getElementById("modalpapa");
+
+    let modulcontainerpapa=document.createElement("div");
+    modulcontainerpapa.classList.add("neuesModul");
+    modulpapa.appendChild(modulcontainerpapa);
+
+    let modulcontainer=document.createElement("div");
+    modulcontainer.classList.add("form-check-inline");
+    modulcontainerpapa.appendChild(modulcontainer);
+
+    let modullabel1=document.createElement("label");
+    modullabel1.innerHTML="Menge";
+    modulcontainer.appendChild(modullabel1);
+
+    let modullabel1a=document.createElement("label");
+    modullabel1a.innerHTML="Einheit";
+    modulcontainer.appendChild(modullabel1a);
+
+    let modullabel2=document.createElement("label");
+    modullabel2.innerHTML="Name";
+    modulcontainer.appendChild(modullabel2);
+
+    let modulinput1=document.createElement("input");
+    modulinput1.classList.add("form-control");
+    modulinput1.setAttribute("type","text"); 
+    modulinput1.setAttribute("name","menge[]");
+    modullabel1.appendChild(modulinput1); 
+ 
+    let modulinput1a=document.createElement("select");
+    modulinput1a.classList.add("form-control");
+    modulinput1a.innerHTML='<option value="">bitte auswählen</option><option value="kg">kg</option><option value="g">g</option><option value="ml">ml</option>';
+    modulinput1a.setAttribute("name","einheit[]");
+    modullabel1a.appendChild(modulinput1a);  
+    
+    let modulinput2=document.createElement("input");
+    modulinput2.classList.add("form-control");
+    modulinput2.setAttribute("type","text");
+    modulinput2.setAttribute("name","name[]");
+    modulinput2.setAttribute("required","");
+    modullabel2.appendChild(modulinput2);            
+
+   
+}
+
+function modulEntfernen(){
+    let neuemodule=document.getElementsByClassName("neuesModul");
+    let delmodul=neuemodule[(neuemodule.length)-1];
+    delmodul.remove();
+}
+
+</script>
+</html>
