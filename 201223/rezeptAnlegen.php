@@ -1,21 +1,25 @@
-<h1>yes b</h1>
-
 <?php
-    
-    $rnamew=$_GET["rnameeingabe"];                       
-    $kbeschw=$_GET["kbescheingabe"];
-    $dauerw=$_GET["dauer"];
-    $schwierigw=$_GET["schwer"];
-    $kategw=$_GET["sgang"];
-    $beschw=$_GET["zubeingabe"];
     $mysqli = new mysqli('localhost', 'root','', 'kochbuch_ws2021');
+
+    $rnamew=$_POST["rnameeingabe"];                       
+    $kbeschw=$_POST["kbescheingabe"];
+    $dauerw=$_POST["dauer"];
+    $schwierigw=$_POST["schwer"];
+    $kategw=$_POST["sgang"];
+    $beschw=$_POST["zubeingabe"];
+
+    $bildnamemitjpg=mktime().$_FILES['bild']['name'];
+    
+    move_uploaded_file($_FILES['bild']['tmp_name'],"bilder/".$bildnamemitjpg);
+
+    
 
     if (mysqli_connect_errno()) {
         echo "Keine Verbindung zur Datenbank möglich: " . mysqli_connect_error();
     }
 
-    $sql = "INSERT INTO rezepte (name,kurztext,dauer,schwierig,kategorie,beschreibung) 
-    VALUES ('$rnamew', '$kbeschw','$dauerw','$schwierigw','$kategw','$beschw')";
+    $sql = "INSERT INTO rezepte (name,kurztext,dauer,schwierig,bild,kategorie,beschreibung) 
+    VALUES ('$rnamew', '$kbeschw','$dauerw','$schwierigw','$bildnamemitjpg','$kategw','$beschw')";
 
     if ($mysqli->query($sql) === TRUE) {
         echo "New record created successfully";
