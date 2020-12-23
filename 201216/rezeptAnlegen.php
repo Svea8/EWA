@@ -2,8 +2,8 @@
 
 <?php
     
-    /*$rnamew=$name;                       
-    $kbeschw=$kurztext;
+    $rnamew=$_GET["rnameeingabe"];                       
+    $kbeschw=$_GET["kbescheingabe"];
     $mysqli = new mysqli('localhost', 'root','', 'kochbuch_ws2021');
 
     if (mysqli_connect_errno()) {
@@ -27,8 +27,5 @@
         }
         echo (json_encode($daten));
     }
-    
-    $mysqli -> close();*/
-
-
+    $mysqli -> close();
 ?>
