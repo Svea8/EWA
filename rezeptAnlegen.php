@@ -34,8 +34,7 @@
         while($row = $ergebnis -> fetch_assoc()) {
             $daten[] = $row;
         }
-        $fin=json_encode($daten);
-        echo "<h1>Rezepte</h1><p>".$dauerw."</p>";
+        echo (json_encode($daten));
     }
     $mysqli -> close();
 ?>
