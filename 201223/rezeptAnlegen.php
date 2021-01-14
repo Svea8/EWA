@@ -35,7 +35,8 @@
             $daten[] = $row;
         }
         $fin=json_encode($daten);
-        echo "<h1>Rezepte</h1><p>".$dauerw."</p>";
+        echo "<h1>neues Rezept</h1><p>Name:".$rnamew."</p><p>Beschreibung:".$kbeschw."</p><p>Dauer:".$dauerw."</p>
+        <p>Schwierigkeit:".$schwierigw."</p><p>Zutaten:".$eschw."</p><img src='bilder/".$bildnamemitjpg."' />";
     }
     $mysqli -> close();
 ?>
