@@ -1,5 +1,19 @@
 <?php session_start() ?>
-
+<?php 
+	$members = array();
+	
+	$members[0] = array();
+	$members[0][0] = 1;
+	$members[0][1] = "Ute";
+	
+	$members[1] = array();
+	$members[1][0] = 2;
+	$members[1][1] = "Hans";
+	
+	$members[2] = array();
+	$members[2][0] = 3;
+	$members[2][1] = "Peter";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,18 +28,20 @@ crossorigin="anonymous">
 <body>
     
     <h1>Team wählen</h1>
-    <form method="POST">
-    <input type="text" name="feld1" value="Naomi"><input type="submit" name="but1" action="team.php" value="wählen">
+    <?php 
+    for ($i=0; $i < count($members) ; $i++) { 
+    ?>
+    <form method="POST" action="tabelle.php">
+        <input type="hidden" name="id" value="<?php echo $members[$i][0];?>">
+        <inline><?php echo $members[$i][1];?></inline>
+        <input type="submit" name="but<?php echo $i+1;?>" value="wählen">
     </form>
-    <form method="POST">
-    <input type="text" name="feld2" value="Zoe"><input type="submit" name="but2" action="tabelle.php" value="wählen">
-    </form>
-    <form method="POST">
-    <input type="text" name="feld3" value="Svea"><input type="submit" name="but3" action="tabelle.php" value="wählen">
-    </form>
+    <?php
+    }
+    ?>
     </br>
-    <form method="POST">
-    <input type="submit" action="team.php" value="weiter">
+    <form method="POST" action="team.php">
+    <input type="submit" value="weiter">
     </form>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -39,19 +55,17 @@ crossorigin="anonymous">
 </body>
 </html>
 <?php 
-if (!isset($_SESSION['feld'])) {
-    $_SESSION['feld']=array();
+if (!isset($_SESSION['id'])) {
+    $_SESSION['id']=array();
 }
-if (isset($_POST["but1"])) {
-    $_SESSION['feld'][]=$_POST["feld1"];
-    echo "1";
+if (isset($_POST["but1"])&&!in_array($members[0][1], $_SESSION['id'])) {
+    $_SESSION['id'][]=$members[0][1];
 }
-if (isset($_POST["but2"])) {
-    $_SESSION['feld'][]=$_POST["feld2"];
-    echo "2";
+if (isset($_POST["but2"])&&!in_array($members[1][1], $_SESSION['id'])) {
+    $_SESSION['id'][]=$members[1][1];
 }
-if (isset($_POST["but3"])) {
-    $_SESSION['feld'][]=$_POST["feld3"];
-    echo "3";
+if (isset($_POST["but3"])&&!in_array($members[2][1], $_SESSION['id'])) {
+    $_SESSION['id'][]=$members[2][1];
 }
+//echo $_SESSION['id'][0].$_SESSION['id'][1].$_SESSION['id'][2];
 ?>
