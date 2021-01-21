@@ -26,7 +26,6 @@ crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
-    
     <h1>Team wählen</h1>
     <?php 
     for ($i=0; $i < count($members) ; $i++) { 
@@ -34,9 +33,12 @@ crossorigin="anonymous">
     <form method="POST" action="tabelle.php">
         <input type="hidden" name="id" value="<?php echo $members[$i][0];?>">
         <inline><?php echo $members[$i][1];?></inline>
-        <input type="submit" name="but<?php echo $i+1;?>" value="wählen">
+        <input type="submit" name="but<?php echo $i;?>" value="wählen">
     </form>
     <?php
+    }
+    if (!isset($_SESSION['id'])) {
+        $_SESSION['id']=array();
     }
     ?>
     </br>
@@ -55,17 +57,11 @@ crossorigin="anonymous">
 </body>
 </html>
 <?php 
-if (!isset($_SESSION['id'])) {
-    $_SESSION['id']=array();
+for ($i=0; $i < count($members) ; $i++) { 
+    $butname="but".$i;
+    if (isset($_POST[$butname])&&!in_array($members[$i][1], $_SESSION['id'])) {
+        $_SESSION['id'][$i]=$members[$i][0];
+        echo $_SESSION['id'][$i];
+    }
 }
-if (isset($_POST["but1"])&&!in_array($members[0][1], $_SESSION['id'])) {
-    $_SESSION['id'][]=$members[0][1];
-}
-if (isset($_POST["but2"])&&!in_array($members[1][1], $_SESSION['id'])) {
-    $_SESSION['id'][]=$members[1][1];
-}
-if (isset($_POST["but3"])&&!in_array($members[2][1], $_SESSION['id'])) {
-    $_SESSION['id'][]=$members[2][1];
-}
-//echo $_SESSION['id'][0].$_SESSION['id'][1].$_SESSION['id'][2];
 ?>
